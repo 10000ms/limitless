@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 784. 字母大小写全排列
 
@@ -26,7 +27,6 @@ S 仅由数字和字母组成。
 
 # my answer
 class Solution:
-    num_char = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', }
 
     def letterCasePermutation(self, S):
         """
@@ -39,23 +39,33 @@ class Solution:
         return res
 
     def get_res(self, S, s):
+        """
+        递归查找字符串，找出所有可能
+
+        :param S: 原始字符串
+        :param s: 链接字符串
+        :return: 字符串集
+        """
         index = len(s)
-        if index == len(S) - 1:
-            if S[index] in self.num_char:
-                return [s + S[index]]
-            else:
+        if index == len(S) - 1:  # 判断是否是最后一个
+            if S[index].isalpha():
                 return [s + S[index].upper(), s + S[index].lower()]
-        else:
-            if S[index] in self.num_char:
-                return self.get_res(S, s + S[index])
             else:
+                return [s + S[index]]
+        else:
+            if S[index].isalpha():
                 return self.get_res(S, s + S[index].upper()) + self.get_res(S, s + S[index].lower())
+            else:
+                return self.get_res(S, s + S[index])
 
 
 # better answer by other
 class Solution2:
     def letterCasePermutation(self, S):
         """
+        列表生成器精妙的使用，一个一个字符判断加入ans数组，字母就在ans列表中的每个字符串加上大小写两种情况
+        （字符串数量翻倍），数字就在列表中每个字符串加上数字字符
+
         :type S: str
         :rtype: List[str]
         """
@@ -74,6 +84,8 @@ import itertools
 class Solution3:
     def letterCasePermutation(self, S):
         """
+        依旧是使用列表生成器，但先遍历S，把每个位置的可能列出，生成string列表，空间和时间花费稍微高一点
+
         :type S: str
         :rtype: List[str]
         """
