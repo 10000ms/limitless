@@ -22,6 +22,7 @@
 #         self.next = None
 
 
+
 # my answer
 class Solution:
 
