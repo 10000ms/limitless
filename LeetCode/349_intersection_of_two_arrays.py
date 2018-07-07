@@ -26,7 +26,7 @@ class Solution(object):
         :rtype: List[int]
         """
         # 先判断是否有传入
-        if len(nums1) == 0 or len(nums2) == 0:
+        if not nums1 or not nums2:
             return []
         # 利用Python的set交集可以直接获得结果
         return list(set(nums1) & set(nums2))
